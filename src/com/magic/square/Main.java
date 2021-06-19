@@ -1,11 +1,6 @@
 package com.magic.square;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Scanner;
-
-import static com.magic.square.MagicSquare.createMagicSquareOdd;
-import static com.magic.square.MagicSquare.initializeSquare;
 
 public class Main {
 
@@ -13,8 +8,25 @@ public class Main {
         Scanner in = new Scanner(System.in);
         int n = getDimension(in);
         System.out.println("The magic number is: " + n * (n * n + 1) / 2);
-        int[][] magicSquare = initializeSquare(n,0);
-        createMagicSquareOdd(n, magicSquare);
+        int [][]magicSquare;
+        if(n%2==0){
+            if(n%4==0){
+                //TODO
+                magicSquare = null;
+            }else {
+                magicSquare = MagicSquare.magicSquareSinglyEven(n);
+            }
+        }else{
+            magicSquare = MagicSquare.createMagicSquareOdd(n);
+        }
+        MagicSquare.printMatrix(magicSquare);
+
+        if(MagicSquare.validateMagicSquare(magicSquare,n * (n * n + 1) / 2)){
+            System.out.println("This is Magic");
+        }else{
+            System.out.println("This is NOT Magic");
+        }
+
     }
 
     private static int getDimension(Scanner in) {
