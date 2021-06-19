@@ -11,10 +11,9 @@ public class Main {
         int [][]magicSquare;
         if(n%2==0){
             if(n%4==0){
-                //TODO
-                magicSquare = null;
+                magicSquare = MagicSquare.createMagicSquareDoubleEven(n);
             }else {
-                magicSquare = MagicSquare.magicSquareSinglyEven(n);
+                magicSquare = MagicSquare.createMagicSquareSinglyEven(n);
             }
         }else{
             magicSquare = MagicSquare.createMagicSquareOdd(n);

@@ -5,9 +5,9 @@ import java.util.Arrays;
 public class MagicSquare {
 
     public static int[][] createMagicSquareOdd(int n) {
+        int[][] magicSquare = initializeSquare(n, 0);
         int row = n / 2;
         int column = n - 1;
-        int[][] magicSquare = initializeSquare(n, 0);
         magicSquare[row][column] = 1;
         int numberCount = 2;
         row -= 1;
@@ -34,13 +34,13 @@ public class MagicSquare {
         return magicSquare;
     }
 
-    static int[][] magicSquareSinglyEven(int n) {
+    static int[][] createMagicSquareSinglyEven(int n) {
         int size = n * n;
         int halfN = n / 2;
         int subSquareSize = size / 4;
 
         int[][] subSquare = createMagicSquareOdd(halfN);
-        int[] quadrantFactors = {0, 2, 3,1 };
+        int[] quadrantFactors = {0, 2, 3, 1};
         int[][] result = new int[n][n];
 
         for (int r = 0; r < n; r++) {
@@ -69,6 +69,37 @@ public class MagicSquare {
             }
 
         return result;
+    }
+
+    public static int[][] createMagicSquareDoubleEven(int n) {
+        int[][] magicSquare = new int[n][n];
+        int i, j;
+
+        for (i = 0; i < n; i++)
+            for (j = 0; j < n; j++)
+                magicSquare[i][j] = (n * i) + j + 1;
+
+        for (i = 0; i < n / 4; i++)
+            for (j = 0; j < n / 4; j++)
+                magicSquare[i][j] = (n * n + 1) - magicSquare[i][j];
+
+        for (i = 0; i < n / 4; i++)
+            for (j = 3 * (n / 4); j < n; j++)
+                magicSquare[i][j] = (n * n + 1) - magicSquare[i][j];
+
+        for (i = 3 * n / 4; i < n; i++)
+            for (j = 0; j < n / 4; j++)
+                magicSquare[i][j] = (n * n + 1) - magicSquare[i][j];
+
+        for (i = 3 * n / 4; i < n; i++)
+            for (j = 3 * n / 4; j < n; j++)
+                magicSquare[i][j] = (n * n + 1) - magicSquare[i][j];
+
+        for (i = n / 4; i < 3 * n / 4; i++)
+            for (j = n / 4; j < 3 * n / 4; j++)
+                magicSquare[i][j] = (n * n + 1) - magicSquare[i][j];
+
+        return magicSquare;
     }
 
     public static void printMatrix(int[][] magicSquare) {
